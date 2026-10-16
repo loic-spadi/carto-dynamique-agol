@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patrimoine culturel et paysager — Annexe du Parc Naturel Régional du Morvan</title>
+
+  <style>
+    @font-face {
+      font-family: 'ChollaSlab_Regular';
+      src: url('ChollaSlab_Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --violet:  #631c5d;
+      --rose:    #f6ceff;
+      --noir:    #111111;
+      --blanc:   #ffffff;
+      --card-h:  360px;
+      --font:    'ChollaSlab_Regular', Georgia, serif;
+      --bg-image: url('images/background_culturel.png');
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background-color: rgba(163, 163, 163, 0.83);
+      background-image: var(--bg-image);
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(60, 60, 60, 0.55);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: var(--violet);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 28px;
+      height: 80px;
+    }
+
+    .header-title {
+      font-size: 1.5rem;
+      font-family: 'ChollaSlab_Regular', serif;
+      color: var(--blanc);
+    }
+    a.header-title { text-decoration: none; }
+    a.header-title:hover { text-decoration: none; }
+
+    .header-logos {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      height: 56px;
+    }
+    .logo-link:hover { opacity: 0.82; }
+
+    .logo-pnr  { width: 56px; }
+    .logo-unistra { padding: 6px 14px; }
+    .logo-link img { max-height: 44px; width: auto; object-fit: contain; }
+
+    .hero {
+      background: var(--blanc);
+      border-bottom: 0.1px solid var(--noir);
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .hero-title {
+      position: absolute;
+      bottom: 75px;
+      left: 100px;
+      font-size: 3rem;
+      font-style: italic;
+      color: var(--blanc);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity:0.7;
+    }
+
+    .hero-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: repeating-linear-gradient(
+        45deg, #e8e8e8 0, #e8e8e8 10px, #f5f5f5 10px, #f5f5f5 20px
+      );
+      opacity: 0.7;
+      color: #999;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .search-wrap {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      display: flex;
+      border: 2.5px solid var(--noir);
+      border-radius: 7px;
+      background: var(--blanc);
+    }
+    .search-wrap input {
+      font-family: var(--font);
+      font-size: 0.95rem;
+      border: none;
+      outline: none;
+      padding: 7px 14px;
+      width: 220px;
+      background: transparent;
+      color: var(--noir);
+    }
+    .search-wrap input::placeholder { color: #aaa; }
+    .search-wrap button {
+      background: var(--violet);
+      border: none;
+      cursor: pointer;
+      padding: 0 14px;
+      color: var(--blanc);
+      font-size: 1rem;
+      transition: background 0.2s;
+      border-radius: 0 5px 5px 0;
+    }
+    .search-wrap button:hover { background: #7a007a; }
+
+    .content-section {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 48px 40px 20px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .content-left {
+      flex: 1;
+      text-align: center;
+    }
+
+    .content-section h2 {
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--blanc);
+      margin-bottom: 14px;
+      margin-top: 14px;
+      border-left: 4px solid var(--violet);
+      padding-left: 14px;
+      text-align: center;
+    }
+
+    .content-section p {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #ffffff;
+      margin-bottom: 24px;
+      text-align:center;
+    }
+
+    .content-right {
+      flex: 0 0 500px;
+    }
+
+    .card-map {
+      position: relative;
+      width: 100%;
+      height: 500px;    
+      border: 3px solid var(--noir);
+      border-radius: 7px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .card-map .map-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;    
+      object-position: center;
+      background-color: #e8f0e8;
+      display: block;
+    }
+
+    .card-map .card-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.88);
+      border-top: 2px solid var(--noir);
+      padding: 14px 18px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: background 0.25s, color 0.25s;
+      color: var(--noir);
+    }
+    .card-map:hover .card-label {
+      background: var(--violet);
+      color: var(--blanc);
+    }
+    .card-map .card-arrow {
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.25s, transform 0.25s;
+      white-space: nowrap;
+      font-size: 0.95rem;
+    }
+    .card-map:hover .card-arrow { opacity: 1; transform: translateX(0); }
+
+    .section-title {
+      max-width: 1100px;
+      margin: 40px auto 0;
+      padding: 0 40px;
+      text-align:center;
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--blanc);
+      padding-left: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cards-section {
+      padding: 10px 30px 70px;
+      display: flex;
+      gap: 50px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      position: relative;
+      width: 400px;
+      height: var(--card-h);
+      border: 3px solid var(--noir); border-radius:7px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .card-bg {
+      position: absolute;
+      inset: 0;
+      background-image: var(--card-bg, none);
+      background-size: cover;
+      background-position: center;
+      background-color: #ccc; 
+      transition: transform 0.4s ease;
+    }
+    .card:hover .card-bg { transform: scale(1.04); }
+
+    .card-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.88);
+      border-top: 2px solid var(--noir);
+      padding: 14px 18px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: background 0.25s, color 0.25s;
+      color: var(--noir);
+    }
+    .card:hover .card-label {
+      background: var(--violet);
+      color: var(--blanc);
+    }
+
+    .card-label-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .card-arrow {
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.25s, transform 0.25s;
+      white-space: nowrap;
+      font-size: 0.95rem;
+    }
+    .card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .more-section {
+      text-align:center;
+      max-width: 1100px;
+      margin: 0 auto;
+      margin-bottom: 64px;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .more-section h2 {
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--blanc);
+      margin-bottom: 14px;
+      border-left: 4px solid var(--violet);
+      padding-left: 14px;
+    }
+
+    .more-links {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .more-btn {
+      background: var(--blanc);
+      border: 2.5px solid var(--violet);
+      border-radius:7px;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: var(--violet);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .more-btn:hover { background: var(--violet); color: var(--blanc); border-color: var(--violet); }
+
+    footer {
+      background: var(--violet);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 28px;
+      height: 70px;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 46px;
+      padding: 4px 12px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    footer .footer-logo:hover { opacity: 0.82; }
+    footer .footer-logo img { height: 100%; width: auto; object-fit: contain; }
+
+    footer .footer-credit {
+      font-family: var(--font);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--blanc);
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="header-title" href="accueil.html" title="Retour à l'accueil">Annexe du Parc Naturel Régional du Morvan</a>
+    <div class="header-logos">
+      <a class="logo-link logo-pnr"
+         href="https://www.parcdumorvan.org"
+         target="_blank"
+         title="Parc Naturel Régional du Morvan - Site officiel">
+        <img src="images/Logo_PNR_morvan.png" alt="PNR du Morvan">
+      </a>
+      <a class="logo-link logo-unistra"
+         href="https://www.unistra.fr"
+         target="_blank"
+         title="Université de Strasbourg">
+        <img src="images/Université_de_Strasbourg.png" alt="Université de Strasbourg">
+      </a>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1 class="hero-title">Patrimoine culturel et paysager</h1>
+
+    <img class="hero-img" src="images/morvan_header.jpg">
+    <div class="search-wrap">
+      <input type="text" placeholder="Rechercher…" aria-label="Recherche">
+      <button aria-label="Lancer la recherche">&#128269;</button>
+    </div>
+  </div>
+
+<div class="content-section">
+
+  <div class="content-left">
+    <h2>Les cultures et paysages morvandiaux</h2>
+    <p>
+      Le Parc naturel régional du Morvan présente un patrimoine culturel et paysager riche, façonné par les interactions
+      entre les activités humaines et un environnement de moyenne montagne. Ses paysages sont marqués par la présence de
+      lacs, de cours d’eau et de sommets boisés, qui structurent fortement le territoire. Ce patrimoine paysager
+      s’accompagne d’un patrimoine culturel varié, visible à travers des châteaux, des musées et un bâti traditionnel
+      témoignant de l’histoire locale. Héritage d’activités anciennes, notamment le flottage du bois vers Paris, cet
+      ensemble reflète une identité territoriale forte, à découvrir plus en détail à travers la cartographie proposée.
+    </p>
+  </div>
+
+  <div class="content-right">
+    <a class="card-map"
+       href="https://storymaps.arcgis.com/stories/28902d2b4bc84a45a21d7a77ce951d57"
+       target="_blank"
+       title="Accéder à la carte interactive">
+       <img class="map-img" src="images/carto_culturel.png" alt="Carte Patrimoine Culturel">
+      <div class="card-label">
+        <span class="card-label-text">Carte interactive du territoire</span>
+        <span class="card-arrow">Ouvrir la carte →</span>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<h2 class="section-title">Les thématiques</h2>
+
+  <section class="cards-section">
+    
+    <a class="card"
+       href="https://storymaps.arcgis.com/stories/f56b20f3ffc04204960fb8bcc69b4c9d"
+       style="--card-bg: url('images/presentation_pic.png')">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <span class="card-label-text">Presentation générale du Parc</span>
+        <span class="card-arrow">En savoir plus →</span>
+      </div>
+    </a>
+
+    <a class="card"
+       href="patrimoine_naturel.html"
+       style="--card-bg: url('images/naturel_pic.jpg')">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <span class="card-label-text">Patrimoine naturel et biodiversité</span>
+        <span class="card-arrow">En savoir plus →</span>
+      </div>
+    </a>
+
+    <a class="card"
+       href="territoire.html"
+       style="--card-bg: url('images/territoire_pic.jpg')">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <span class="card-label-text">Territoire du Morvan</span>
+        <span class="card-arrow">En savoir plus →</span>
+      </div>
+    </a>
+
+  </section>
+
+  <div class="more-section">
+    <h2>Pour en savoir plus sur le Parc</h2>
+    <div class="more-links">
+      <a class="more-btn" href="https://www.parcdumorvan.org" target="_blank">Site officiel du Parc</a>
+      <a class="more-btn" href="https://www.parcs-naturels-regionaux.fr" target="_blank">Parcs naturels régionaux de France</a>
+      <a class="more-btn" href="https://www.patrimoinedumorvan.org" target="_blank">Patrimoine du Morvan</a>
+      <a class="more-btn" href="https://www.parcdumorvan.org/le-parc/la-maison-du-parc/" target="_blank">La Maison du Parc</a>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-logo"
+       href="https://www.unistra.fr"
+       target="_blank"
+       title="Université de Strasbourg">
+      <img src="images/Université_de_Strasbourg.png" alt="Université de Strasbourg">
+    </a>
+    <span class="footer-credit">Site réalisé par Loïc S. pour le compte de l'Université de Strasbourg - 2026</span>
+  </footer>
+
+</body>
+</html>
